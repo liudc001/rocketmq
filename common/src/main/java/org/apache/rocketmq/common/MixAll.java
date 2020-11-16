@@ -45,6 +45,7 @@ import org.apache.rocketmq.logging.InternalLogger;
 import org.apache.rocketmq.logging.InternalLoggerFactory;
 
 public class MixAll {
+	
     private static final InternalLogger log = InternalLoggerFactory.getLogger(LoggerName.COMMON_LOGGER_NAME);
 
     public static final String ROCKETMQ_HOME_ENV = "ROCKETMQ_HOME";
@@ -141,7 +142,6 @@ public class MixAll {
                 return 0;
             }
         }
-
         return 0;
     }
 
@@ -230,7 +230,6 @@ public class MixAll {
                 }
             }
         }
-
         return null;
     }
 
@@ -238,8 +237,7 @@ public class MixAll {
         printObjectProperties(logger, object, false);
     }
 
-    public static void printObjectProperties(final InternalLogger logger, final Object object,
-        final boolean onlyImportantField) {
+    public static void printObjectProperties(final InternalLogger logger, final Object object, final boolean onlyImportantField) {
         Field[] fields = object.getClass().getDeclaredFields();
         for (Field field : fields) {
             if (!Modifier.isStatic(field.getModifiers())) {
@@ -291,7 +289,6 @@ public class MixAll {
             log.error("Failed to handle properties", e);
             return null;
         }
-
         return properties;
     }
 
@@ -379,7 +376,6 @@ public class MixAll {
         } catch (SocketException e) {
             throw new RuntimeException("get local inet address fail", e);
         }
-
         return inetAddressList;
     }
 
@@ -391,10 +387,8 @@ public class MixAll {
                 String candidatesHost = getLocalhostByNetworkInterface();
                 if (candidatesHost != null)
                     return candidatesHost;
-
             } catch (Exception ignored) {
             }
-
             throw new RuntimeException("InetAddress java.net.InetAddress.getLocalHost() throws UnknownHostException" + FAQUrl.suggestTodo(FAQUrl.UNKNOWN_HOST_EXCEPTION), e);
         }
     }
