@@ -27,8 +27,19 @@ import org.apache.rocketmq.remoting.protocol.RemotingCommand;
 
 public interface RemotingServer extends RemotingService {
 
+	/**
+	 * 注册处理器
+	 * @param requestCode
+	 * @param processor
+	 * @param executor
+	 */
     void registerProcessor(final int requestCode, final NettyRequestProcessor processor, final ExecutorService executor);
 
+    /**
+     * 注册默认处理器
+     * @param processor
+     * @param executor
+     */
     void registerDefaultProcessor(final NettyRequestProcessor processor, final ExecutorService executor);
 
     /**
@@ -37,6 +48,11 @@ public interface RemotingServer extends RemotingService {
      */
     int localListenPort();
 
+    /**
+     * 根据requestCode 获取处理器pair
+     * @param requestCode
+     * @return
+     */
     Pair<NettyRequestProcessor, ExecutorService> getProcessorPair(final int requestCode);
 
     /**
@@ -49,9 +65,8 @@ public interface RemotingServer extends RemotingService {
      * @throws RemotingSendRequestException
      * @throws RemotingTimeoutException
      */
-    RemotingCommand invokeSync(final Channel channel, 
-    		final RemotingCommand request, final long timeoutMillis) throws InterruptedException, 
-    	RemotingSendRequestException, RemotingTimeoutException;
+    RemotingCommand invokeSync(final Channel channel, final RemotingCommand request, 
+    		final long timeoutMillis) throws InterruptedException, RemotingSendRequestException, RemotingTimeoutException;
 
     /**
      * 异步调用
@@ -64,10 +79,8 @@ public interface RemotingServer extends RemotingService {
      * @throws RemotingTimeoutException
      * @throws RemotingSendRequestException
      */
-    void invokeAsync(final Channel channel, 
-    		final RemotingCommand request, final long timeoutMillis, 
-    		final InvokeCallback invokeCallback) throws InterruptedException, 
-    	RemotingTooMuchRequestException, RemotingTimeoutException, RemotingSendRequestException;
+    void invokeAsync(final Channel channel, final RemotingCommand request, final long timeoutMillis, 
+    		final InvokeCallback invokeCallback) throws InterruptedException, RemotingTooMuchRequestException, RemotingTimeoutException, RemotingSendRequestException;
 
     /**
      * 单向调用
@@ -79,8 +92,7 @@ public interface RemotingServer extends RemotingService {
      * @throws RemotingTimeoutException
      * @throws RemotingSendRequestException
      */
-    void invokeOneway(final Channel channel, 
-    		final RemotingCommand request, final long timeoutMillis) throws InterruptedException, 
-    	RemotingTooMuchRequestException, RemotingTimeoutException, RemotingSendRequestException;
+    void invokeOneway(final Channel channel, final RemotingCommand request, 
+    		final long timeoutMillis) throws InterruptedException, RemotingTooMuchRequestException, RemotingTimeoutException, RemotingSendRequestException;
 
 }
