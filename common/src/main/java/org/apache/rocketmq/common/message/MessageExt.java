@@ -23,6 +23,7 @@ import org.apache.rocketmq.common.TopicFilterType;
 import org.apache.rocketmq.common.sysflag.MessageSysFlag;
 
 public class MessageExt extends Message {
+	
     private static final long serialVersionUID = 5720810158625748049L;
 
     private int queueId;
@@ -60,7 +61,6 @@ public class MessageExt extends Message {
         if ((sysFlag & MessageSysFlag.MULTI_TAGS_FLAG) == MessageSysFlag.MULTI_TAGS_FLAG) {
             return TopicFilterType.MULTI_TAG;
         }
-
         return TopicFilterType.SINGLE_TAG;
     }
 
@@ -122,7 +122,6 @@ public class MessageExt extends Message {
             InetSocketAddress inetSocketAddress = (InetSocketAddress) this.bornHost;
             return inetSocketAddress.getAddress().getHostAddress();
         }
-
         return null;
     }
 
@@ -131,7 +130,6 @@ public class MessageExt extends Message {
             InetSocketAddress inetSocketAddress = (InetSocketAddress) this.bornHost;
             return inetSocketAddress.getAddress().getHostName();
         }
-
         return null;
     }
 

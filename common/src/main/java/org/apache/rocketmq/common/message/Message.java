@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Message implements Serializable {
+	
     private static final long serialVersionUID = 8445773977080406428L;
 
     private String topic;
@@ -68,7 +69,6 @@ public class Message implements Serializable {
         if (null == this.properties) {
             this.properties = new HashMap<String, String>();
         }
-
         this.properties.put(name, value);
     }
 
@@ -83,14 +83,12 @@ public class Message implements Serializable {
             throw new RuntimeException(String.format(
                 "The Property<%s> is used by system, input another please", name));
         }
-
         if (value == null || value.trim().isEmpty()
             || name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException(
                 "The name or value of property can not be null or blank string!"
             );
         }
-
         this.putProperty(name, value);
     }
 
@@ -102,7 +100,6 @@ public class Message implements Serializable {
         if (null == this.properties) {
             this.properties = new HashMap<String, String>();
         }
-
         return this.properties.get(name);
     }
 
@@ -132,7 +129,6 @@ public class Message implements Serializable {
             sb.append(k);
             sb.append(MessageConst.KEY_SEPARATOR);
         }
-
         this.setKeys(sb.toString().trim());
     }
 
@@ -141,7 +137,6 @@ public class Message implements Serializable {
         if (t != null) {
             return Integer.parseInt(t);
         }
-
         return 0;
     }
 
@@ -153,7 +148,6 @@ public class Message implements Serializable {
         String result = this.getProperty(MessageConst.PROPERTY_WAIT_STORE_MSG_OK);
         if (null == result)
             return true;
-
         return Boolean.parseBoolean(result);
     }
 
