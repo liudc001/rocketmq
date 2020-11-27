@@ -16,6 +16,8 @@
  */
 package org.apache.rocketmq.example.quickstart;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -32,7 +34,7 @@ public class Producer {
         /*
          * Instantiate with a producer group name.
          */
-        DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
+        DefaultMQProducer producer = new DefaultMQProducer("sr-producer-test-01");
 
         /*
          * Specify name server addresses.
@@ -45,7 +47,8 @@ public class Producer {
          * }
          * </pre>
          */
-
+        producer.setNamesrvAddr("localhost:9876");
+        
         /*
          * Launch the instance.
          */
@@ -67,7 +70,11 @@ public class Producer {
                 SendResult sendResult = producer.send(msg);
 
                 System.out.printf("%s%n", sendResult);
-            } catch (Exception e) {
+                
+                TimeUnit.SECONDS.sleep(3);
+                
+            } 
+            catch (Exception e) {
                 e.printStackTrace();
                 Thread.sleep(1000);
             }

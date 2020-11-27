@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.rocketmq.example.quickstart;
+package org.apache.rocketmq.example.batch;
 
 import java.util.List;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
@@ -35,7 +35,7 @@ public class Consumer {
         /*
          * Instantiate with specified consumer group name.
          */
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("sr-consumer-test-01");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("sr-consumer-test-02");
 
         /*
          * Specify name server addresses.
@@ -58,7 +58,7 @@ public class Consumer {
         /*
          * Subscribe one more more topics to consume.
          */
-        consumer.subscribe("TopicTest", "*");
+        consumer.subscribe("BatchTest", "*");
 
         /*
          *  Register callback to execute on arrival of messages fetched from brokers.
