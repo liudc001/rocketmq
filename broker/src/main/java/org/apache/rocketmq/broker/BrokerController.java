@@ -127,8 +127,8 @@ public class BrokerController {
     private final ConsumerIdsChangeListener consumerIdsChangeListener;
     private final RebalanceLockManager rebalanceLockManager = new RebalanceLockManager();
     private final BrokerOuterAPI brokerOuterAPI;
-    private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor(new ThreadFactoryImpl(
-        "BrokerControllerScheduledThread"));
+    private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor(
+    		new ThreadFactoryImpl("BrokerControllerScheduledThread"));
     private final SlaveSynchronize slaveSynchronize;
     private final BlockingQueue<Runnable> sendThreadPoolQueue;
     private final BlockingQueue<Runnable> pullThreadPoolQueue;
@@ -163,7 +163,7 @@ public class BrokerController {
     private TransactionalMessageService transactionalMessageService;
     private AbstractTransactionalMessageCheckListener transactionalMessageCheckListener;
     private Future<?> slaveSyncFuture;
-    private Map<Class,AccessValidator> accessValidatorMap = new HashMap<Class, AccessValidator>();
+    private Map<Class<?>,AccessValidator> accessValidatorMap = new HashMap<Class<?>, AccessValidator>();
 
     public BrokerController(
         final BrokerConfig brokerConfig,
@@ -1103,7 +1103,7 @@ public class BrokerController {
 
     }
 
-    public Map<Class, AccessValidator> getAccessValidatorMap() {
+    public Map<Class<?>, AccessValidator> getAccessValidatorMap() {
         return accessValidatorMap;
     }
 

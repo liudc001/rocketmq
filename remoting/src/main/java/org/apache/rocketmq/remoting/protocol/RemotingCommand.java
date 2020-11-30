@@ -47,6 +47,7 @@ public class RemotingCommand {
     // 1, Oneway
     // 1, RESPONSE_COMMAND
     private static final Map<Field, Boolean> NULLABLE_FIELD_CACHE = new HashMap<Field, Boolean>();
+    
     private static final String STRING_CANONICAL_NAME = String.class.getCanonicalName();
     private static final String DOUBLE_CANONICAL_NAME_1 = Double.class.getCanonicalName();
     private static final String DOUBLE_CANONICAL_NAME_2 = double.class.getCanonicalName();
@@ -214,7 +215,6 @@ public class RemotingCommand {
 
     public static byte[] markProtocolType(int source, SerializeType type) {
         byte[] result = new byte[4];
-
         result[0] = type.getCode();
         result[1] = (byte) ((source >> 16) & 0xFF);
         result[2] = (byte) ((source >> 8) & 0xFF);
@@ -235,8 +235,7 @@ public class RemotingCommand {
         this.customHeader = customHeader;
     }
 
-    public CommandCustomHeader decodeCommandCustomHeader(
-        Class<? extends CommandCustomHeader> classHeader) throws RemotingCommandException {
+    public CommandCustomHeader decodeCommandCustomHeader(Class<? extends CommandCustomHeader> classHeader) throws RemotingCommandException {
         CommandCustomHeader objectHeader;
         try {
             objectHeader = classHeader.newInstance();
@@ -247,7 +246,6 @@ public class RemotingCommand {
         }
 
         if (this.extFields != null) {
-
             Field[] fields = getClazzFields(classHeader);
             for (Field field : fields) {
                 if (!Modifier.isStatic(field.getModifiers())) {
@@ -264,19 +262,24 @@ public class RemotingCommand {
 
                             field.setAccessible(true);
                             String type = getCanonicalName(field.getType());
-                            Object valueParsed;
+                            Object valueParsed = null;
 
                             if (type.equals(STRING_CANONICAL_NAME)) {
                                 valueParsed = value;
-                            } else if (type.equals(INTEGER_CANONICAL_NAME_1) || type.equals(INTEGER_CANONICAL_NAME_2)) {
+                            } 
+                            else if (type.equals(INTEGER_CANONICAL_NAME_1) || type.equals(INTEGER_CANONICAL_NAME_2)) {
                                 valueParsed = Integer.parseInt(value);
-                            } else if (type.equals(LONG_CANONICAL_NAME_1) || type.equals(LONG_CANONICAL_NAME_2)) {
+                            } 
+                            else if (type.equals(LONG_CANONICAL_NAME_1) || type.equals(LONG_CANONICAL_NAME_2)) {
                                 valueParsed = Long.parseLong(value);
-                            } else if (type.equals(BOOLEAN_CANONICAL_NAME_1) || type.equals(BOOLEAN_CANONICAL_NAME_2)) {
+                            } 
+                            else if (type.equals(BOOLEAN_CANONICAL_NAME_1) || type.equals(BOOLEAN_CANONICAL_NAME_2)) {
                                 valueParsed = Boolean.parseBoolean(value);
-                            } else if (type.equals(DOUBLE_CANONICAL_NAME_1) || type.equals(DOUBLE_CANONICAL_NAME_2)) {
+                            } 
+                            else if (type.equals(DOUBLE_CANONICAL_NAME_1) || type.equals(DOUBLE_CANONICAL_NAME_2)) {
                                 valueParsed = Double.parseDouble(value);
-                            } else {
+                            } 
+                            else {
                                 throw new RemotingCommandException("the custom field <" + fieldName + "> type is not supported");
                             }
 
