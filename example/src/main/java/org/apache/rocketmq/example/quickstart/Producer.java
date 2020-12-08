@@ -54,7 +54,8 @@ public class Producer {
          */
         producer.start();
 
-        for (int i = 0; i < 1000; i++) {
+        int count = 1;//1000;
+        for (int i = 0; i < count; i++) {
             try {
 
                 /*

@@ -104,7 +104,6 @@ public class MQFaultStrategy {
             if (currentLatency >= latencyMax[i])
                 return this.notAvailableDuration[i];
         }
-
         return 0;
     }
 }
